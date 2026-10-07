@@ -339,6 +339,7 @@ def dashboard():
 
     user = User.query.get(session["user_id"])
 
+    # MFA enforcement
     if user and user.mfa_enabled:
 
         if not session.get("mfa_verified", False):
@@ -355,16 +356,51 @@ def dashboard():
 
             return redirect(url_for("main.home"))
 
+    # Dashboard content
+    if user and user.mfa_enabled:
+
+        mfa_status = """
+            <p style="color: green;">
+                ✓ Multi-factor authentication is enabled.
+            </p>
+
+            <p>
+                MFA verification completed successfully.
+            </p>
+        """
+
+    else:
+
+        mfa_status = f"""
+            <p style="color: orange;">
+                ⚠ Multi-factor authentication is not enabled.
+            </p>
+
+            <p>
+                Your account is currently protected by password authentication only.
+            </p>
+
+            <p>
+                <a href="{url_for("main.mfa_setup")}">
+                    🔐 Set Up MFA
+                </a>
+            </p>
+        """
+
     return f"""
         <h1>Welcome, {session["username"]}!</h1>
 
         <p>Password authentication successful.</p>
 
-        <p>MFA verification completed.</p>
+        {mfa_status}
 
-        <a href="{url_for("main.logout")}">
-            Log out
-        </a>
+        <hr>
+
+        <p>
+            <a href="{url_for("main.logout")}">
+                Log out
+            </a>
+        </p>
     """
 @main.route("/logout")
 def logout():
