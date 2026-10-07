@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SecureAuth | Login</title>
+    <title>SecureAuth | Register</title>
 
     <link
         rel="stylesheet"
@@ -23,27 +23,29 @@
 
                 <h1>SecureAuth</h1>
 
-                <p>
-                    Multi-Factor Authentication Demo
-                </p>
+                <p>Multi-Factor Authentication Demo</p>
             </div>
 
 
             <div class="login-section">
 
-                <h2>Welcome Back</h2>
+                <h2>Create Account</h2>
 
                 <p class="subtitle">
-                    Sign in to access your secure account.
+                    Register a new secure account.
                 </p>
 
-{% with message = get_flashed_messages()|last %}
-    {% if message %}
-        <div class="flash-message">
-            {{ message }}
-        </div>
-    {% endif %}
-{% endwith %}
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="flash-message">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
 
                 <form method="POST">
 
@@ -57,7 +59,24 @@
                             type="text"
                             id="username"
                             name="username"
-                            placeholder="Enter your username"
+                            placeholder="Choose a username"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
                             required
                         >
 
@@ -74,7 +93,7 @@
                             type="password"
                             id="password"
                             name="password"
-                            placeholder="Enter your password"
+                            placeholder="Create a strong password"
                             required
                         >
 
@@ -85,15 +104,16 @@
                         type="submit"
                         class="login-button"
                     >
-                        Sign In
+                        Create Account
                     </button>
 
                 </form>
 
+
                 <p class="auth-link">
-    Don't have an account?
-    <a href="{{ url_for('main.register') }}">Create one</a>
-</p>
+                    Already have an account?
+                    <a href="{{ url_for('main.home') }}">Sign in</a>
+                </p>
 
 
                 <div class="security-notice">
@@ -101,8 +121,8 @@
                     <span>🔐</span>
 
                     <p>
-                        Your account is protected with
-                        multi-factor authentication.
+                        Your password will be securely hashed
+                        before being stored.
                     </p>
 
                 </div>

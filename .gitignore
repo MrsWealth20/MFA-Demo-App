@@ -18,6 +18,8 @@ instance/
 *.db
 *.sqlite
 *.sqlite3
+# Security logs
+secureauth_security.log
 
 # IDE
 .vscode/

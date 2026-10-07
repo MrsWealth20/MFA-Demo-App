@@ -208,3 +208,44 @@ body {
     }
 
 }
+
+.auth-link {
+    text-align: center;
+
+    margin-top: 20px;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+}
+
+
+.auth-link a {
+    color: #f8fafc;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+
+.flash-message {
+    margin-bottom: 20px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    background: rgba(30, 41, 59, 0.8);
+
+    border: 1px solid #334155;
+
+    color: #e2e8f0;
+
+    font-size: 13px;
+}

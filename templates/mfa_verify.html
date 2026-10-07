@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MFA Verification | SecureAuth</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <div class="auth-card">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🔐
+                </div>
+
+                <h1>SecureAuth</h1>
+
+                <p>Multi-Factor Authentication</p>
+
+            </div>
+
+
+            <div class="login-section">
+
+                <h2>Verify Your Identity</h2>
+
+                <p class="subtitle">
+                    Enter the 6-digit code from your authenticator app.
+                </p>
+
+
+                {% with message = get_flashed_messages()|last %}
+
+                    {% if message %}
+
+                        <div class="flash-message">
+                            {{ message }}
+                        </div>
+
+                    {% endif %}
+
+                {% endwith %}
+
+
+                <form method="POST">
+
+                    <div class="form-group">
+
+                        <label for="verification_code">
+                            Authentication Code
+                        </label>
+
+                        <input
+                            type="text"
+                            id="verification_code"
+                            name="verification_code"
+                            placeholder="Enter 6-digit code"
+                            maxlength="6"
+                            inputmode="numeric"
+                            autocomplete="one-time-code"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+                        Verify MFA
+                    </button>
+
+                </form>
+
+
+                <div class="security-notice">
+
+                    <span>🛡️</span>
+
+                    <p>
+                        Your account is protected with
+                        multi-factor authentication.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
